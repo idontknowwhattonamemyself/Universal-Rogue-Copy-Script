@@ -8,8 +8,18 @@ getgenv().Toggled = false;
 
 local holdingWKey = false
 local holdingSKey = false
-
-
+local atbdist = 3
+local atb
+local lp = game:GetService("Players").LocalPlayer
+game:GetService("RunService").RenderStepped:Connect(function()
+if atb == true and lp.Character ~= nil then
+    for i, v in pairs(game.Players:GetPlayers()) do 
+        if v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") and lp.Character:FindFirstChild("HumanoidRootPart") and (lp.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude < 20 then
+            lp.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame + v.Character.HumanoidRootPart.CFrame.LookVector * atbdist * -1
+            end
+        end
+    end
+end)
 
 UIS.InputBegan:Connect(function(inputObject) 
     if(inputObject.KeyCode==Enum.KeyCode.W)then
@@ -160,6 +170,7 @@ local Toggle = Tab:CreateToggle({
 ESP.Trinky = Value
 	end,
 })
+
 local Toggle = Tab:CreateToggle({
 	Name = "Trinket Auto Pickup",
 	CurrentValue = false,
@@ -198,6 +209,25 @@ local Keybind = Tab:CreateKeybind({
     end
 
     end,
+})
+local Toggle = Tab:CreateToggle({
+	Name = "Attach To Back",
+	CurrentValue = false,
+	Flag = "ATB", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+atb = Value
+	end,
+})
+local Slider = Tab:CreateSlider({
+	Name = "Attach To Back Distance",
+	Range = {0, 10},
+	Increment = 1,
+	Suffix = "Studs",
+	CurrentValue = 3,
+	Flag = "ATBD", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+atbdist = Value
+	end,
 })
 Rayfield:LoadConfiguration()
 
