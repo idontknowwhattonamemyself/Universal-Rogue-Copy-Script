@@ -200,5 +200,5 @@ local Keybind = Tab:CreateKeybind({
 })
 Rayfield:LoadConfiguration()
 
-        syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/idontknowwhattonamemyself/Universal-Rogue-Copy-Script/Lua/Main"))]])
+        syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/idontknowwhattonamemyself/Universal-Rogue-Copy-Script/Lua/Main"))()]])
 
