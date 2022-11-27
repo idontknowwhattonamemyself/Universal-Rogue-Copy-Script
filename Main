@@ -150,24 +150,19 @@ ESP.Names = true
 ESP:Toggle(true)
  
 game.Workspace.Trinkets.ChildAdded:Connect(function(child)
-if child:FindFirstChildOfClass("Part") and child:FindFirstChildOfClass("Part"):FindFirstChildOfClass("ClickDetector") then
-    ESP:Add(child, {
-        Name = "Trinket",
-        Color = BrickColor.new("Magenta").Color,
-        IsEnabled = "Trinky"
-    })
-end
-
-end)
-
-for i, child in pairs(game.Workspace.Trinkets:GetChildren()) do 
-    if child:FindFirstChildOfClass("Part") and child:FindFirstChildOfClass("Part"):FindFirstChildOfClass("ClickDetector") then
-        ESP:Add(child, {
+   ESP:Add(child, {
             Name = "Trinket",
             Color = BrickColor.new("Magenta").Color,
             IsEnabled = "Trinky"
         })
-    end
+end)
+
+for i, child in pairs(game.Workspace.Trinkets:GetChildren()) do 
+   ESP:Add(child, {
+            Name = "Trinket",
+            Color = BrickColor.new("Magenta").Color,
+            IsEnabled = "Trinky"
+        })
 end
 ESP.Trinky = false
 local Toggle = Tab:CreateToggle({
