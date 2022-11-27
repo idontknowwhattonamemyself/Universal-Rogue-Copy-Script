@@ -199,7 +199,7 @@ local Keybind = Tab:CreateKeybind({
     end,
 })
 Rayfield:LoadConfiguration()
-if syn then 
+if syn.queue_on_teleport then 
     game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started then
         syn.queue_on_teleport([[
