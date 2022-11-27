@@ -117,8 +117,8 @@ local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 
     
 game:GetService("RunService").Heartbeat:Connect(function()
-    if  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and nofall == true then
-            game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.ApplyFallDamage.Parent = game.StarterPlayer
+    if  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("ApplyFallDamage") and nofall == true then
+             game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("ApplyFallDamage").Parent = game.StarterPlayer
     elseif  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and nofall == false and game.StarterPlayer:FindFirstChild("ApplyFallDamage") then
             game.StarterPlayer:FindFirstChild("ApplyFallDamage").Parent = game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes
         end
