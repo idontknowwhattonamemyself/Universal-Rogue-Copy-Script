@@ -1,4 +1,12 @@
 repeat wait() until game:IsLoaded()
+local kbs = {}
+for i, v in pairs(game.Workspace:GetDescendants()) do
+    if v:FindFirstChild("TouchInterest")  and  v.Name ~= "OrderField" and v.Name ~= "SolanBall" and v.Name ~= "SolansGate" and v.Name ~= "TeleportOut" and v.Name ~= "BaalField" and v.Name ~= "Elevator" and v.Name ~= "MageField" and v.Name ~= "TeleportIn"then
+        table.insert(kbs,v)
+        end
+end
+
+    
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 local FlySpeed = 150;
 local UIS = game:GetService("UserInputService")
@@ -14,7 +22,7 @@ local lp = game:GetService("Players").LocalPlayer
 game:GetService("RunService").RenderStepped:Connect(function()
 if atb == true and lp.Character ~= nil then
     for i, v in pairs(game.Players:GetPlayers()) do 
-        if v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") and lp.Character:FindFirstChild("HumanoidRootPart") and (lp.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude < 20 then
+        if v ~= lp and v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") and lp.Character:FindFirstChild("HumanoidRootPart") and (lp.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude < 20 then
             lp.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame + v.Character.HumanoidRootPart.CFrame.LookVector * atbdist * -1
             end
         end
@@ -227,6 +235,17 @@ local Slider = Tab:CreateSlider({
 	Flag = "ATBD", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
 atbdist = Value
+	end,
+})
+local Toggle = Tab:CreateToggle({
+	Name = "No Kill Bricks",
+	CurrentValue = false,
+	Flag = "NOKBS", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+for i, v in pairs(kbs) do
+v.CanTouch = not Value
+end
+
 	end,
 })
 Rayfield:LoadConfiguration()
