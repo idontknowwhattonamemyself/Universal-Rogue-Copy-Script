@@ -117,10 +117,10 @@ local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 
     
 game:GetService("RunService").Heartbeat:Connect(function()
-    if  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("ApplyFallDamage") and nofall == true then
-             game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("ApplyFallDamage").Parent = game.StarterPlayer
-    elseif  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and nofall == false and game.StarterPlayer:FindFirstChild("ApplyFallDamage") then
-            game.StarterPlayer:FindFirstChild("ApplyFallDamage").Parent = game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes
+    if  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("FallDamage") and nofall == true then
+             game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("FallDamage").Parent = game.StarterPlayer
+    elseif  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and nofall == false and game.StarterPlayer:FindFirstChild("FallDamage") then
+            game.StarterPlayer:FindFirstChild("FallDamage").Parent = game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes
         end
 end)
 local ap
@@ -246,4 +246,3 @@ end
 Rayfield:LoadConfiguration()
 
         syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/idontknowwhattonamemyself/Universal-Rogue-Copy-Script/Lua/Main"))()]])
-
