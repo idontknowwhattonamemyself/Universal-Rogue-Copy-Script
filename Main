@@ -150,7 +150,7 @@ nofall = Value
 	end,
 })
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
-
+wait(2)
 ESP.Boxes = false
 ESP.Names = true
 ESP:Toggle(true)
