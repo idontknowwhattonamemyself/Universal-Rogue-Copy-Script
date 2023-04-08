@@ -261,7 +261,7 @@ noclip = Value
 })
 local perfloratp = false
 local Toggle = Tab:CreateToggle({
-	Name = "perflora tp lol",
+	Name = "tp projectiles (perflora and lp)",
 	CurrentValue = false,
 	Flag = "pftp", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
@@ -273,9 +273,9 @@ game.RunService.RenderStepped:Connect(function()
     local closest
     local closestmag = 99999999999
     for i, v in pairs(game:GetService("Workspace").Thrown:GetChildren()) do 
-if v.Name == "FlowerProjectile" and v:FindFirstChild("BodyVelocity") then 
+if v.Name == "FlowerProjectile"  or v.Name == "LightArrow"   then 
     for i, v in pairs(game.Players:GetPlayers()) do 
-    if v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v ~= game.Players.LocalPlayer then 
+    if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then 
         local mag = (game.Players.LocalPlayer:GetMouse().Hit.p - v.Character.HumanoidRootPart.Position).Magnitude
         if mag < closestmag then 
             closestmag = mag 
