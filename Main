@@ -250,7 +250,45 @@ end
 
 	end,
 })
-
+local noclip
+local Toggle = Tab:CreateToggle({
+	Name = "Noclip",
+	CurrentValue = false,
+	Flag = "nclip", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+noclip = Value
+	end,
+})
+game.RunService.RenderStepped:Connect(function()
+    if noclip == true and game.Players.LocalPlayer.Character ~= nil then
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
+    if v:IsA("BasePart") then 
+        v.CanCollide = false
+    end
+    end
+    end)
+spawn(function()
+    while wait() do 
+    for i, v in pairs(game.Players:GetPlayers()) do 
+    if v.Backpack:FindFirstChild("Observe") and not table.find(illus, v) or v.Character and v.Character:FindFirstChild("Observe") and not table.find(illus, v) then 
+        table.insert(illus, v)
+        Rayfield:Notify({
+            Title = "Illusionist In Server",
+            Content = "Player: "..v.Name.."\n Id: "..v.UserId,
+            Duration = 50,
+            Image = 4483362458,
+            Actions = { -- Notification Buttons
+                Ignore = {
+                    Name = "Okay!",
+                    Callback = function()
+                    end
+                },
+            },
+        })
+    end
+    end
+    end
+end)
 Rayfield:LoadConfiguration()
 if syn and syn.queue_on_teleport then
         syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/idontknowwhattonamemyself/Universal-Rogue-Copy-Script/Lua/Main"))()]])
