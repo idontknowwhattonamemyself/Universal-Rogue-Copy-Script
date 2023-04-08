@@ -89,13 +89,13 @@ game:GetService'RunService'.RenderStepped:Connect(function()
     end;
 end)
 local Window = Rayfield:CreateWindow({
-	Name = "Rogue Hub",
-	LoadingTitle = "Rogue Hub",
-	LoadingSubtitle = "made by wowzers!#0560",
+	Name = "Rogue Copy Destroyer",
+	LoadingTitle = "Rogue Copy Destroyer",
+	LoadingSubtitle = "made by shart",
 	ConfigurationSaving = {
 		Enabled = true,
 		FolderName = nil, -- Create a custom folder for your hub/game
-		FileName = "RogueHub"
+		FileName = "Copy Destroyer"
 	},
         Discord = {
         	Enabled = false,
@@ -114,15 +114,22 @@ local Window = Rayfield:CreateWindow({
 	}
 })
 local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
+local old
+local nofall = true
+local hook = hookfunction or detour_function
 
+old = hook(Instance.new("RemoteEvent").FireServer, function(self,...)
+    local args = {...}
     
-game:GetService("RunService").Heartbeat:Connect(function()
-    if  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("FallDamage") and nofall == true then
-             game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler").Remotes:FindFirstChild("FallDamage").Parent = game.StarterPlayer
-    elseif  game:GetService("Players").LocalPlayer.Character ~= nil and  game:GetService("Players").LocalPlayer.Character:FindFirstChild("CharacterHandler") and nofall == false and game.StarterPlayer:FindFirstChild("FallDamage") then
-            game.StarterPlayer:FindFirstChild("FallDamage").Parent = game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes
-        end
+    if nofall == true and self.Name == "ApplyFallDamage" then
+            return nil
+            
+
+    end
+
+    return old(self,...)
 end)
+
 local ap
 game:GetService("RunService").Heartbeat:Connect(function()
 if ap == true and game.Players.LocalPlayer.Character ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
@@ -143,11 +150,11 @@ nofall = Value
 	end,
 })
 local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
- 
-ESP.Players = false
+
 ESP.Boxes = false
 ESP.Names = true
 ESP:Toggle(true)
+ESP.Players = false
  
 game.Workspace.Trinkets.ChildAdded:Connect(function(child)
    ESP:Add(child, {
@@ -243,6 +250,8 @@ end
 
 	end,
 })
-Rayfield:LoadConfiguration()
 
+Rayfield:LoadConfiguration()
+if syn and syn.queue_on_teleport then
         syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/idontknowwhattonamemyself/Universal-Rogue-Copy-Script/Lua/Main"))()]])
+end
