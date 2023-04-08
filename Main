@@ -275,7 +275,7 @@ game.RunService.RenderStepped:Connect(function()
     for i, v in pairs(game:GetService("Workspace").Thrown:GetChildren()) do 
 if v.Name == "FlowerProjectile" and v:FindFirstChild("BodyVelocity") then 
     for i, v in pairs(game.Players:GetPlayers()) do 
-    if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then 
+    if v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v ~= game.Players.LocalPlayer then 
         local mag = (game.Players.LocalPlayer:GetMouse().Hit.p - v.Character.HumanoidRootPart.Position).Magnitude
         if mag < closestmag then 
             closestmag = mag 
