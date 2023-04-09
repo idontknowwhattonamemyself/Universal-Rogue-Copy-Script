@@ -239,6 +239,7 @@ local Slider = Tab:CreateSlider({
 atbdist = Value
 	end,
 })
+
 local Toggle = Tab:CreateToggle({
 	Name = "No Kill Bricks",
 	CurrentValue = false,
@@ -268,6 +269,29 @@ local Toggle = Tab:CreateToggle({
 perfloratp = Value
 	end,
 })
+if game.PlaceId ~= 10215650900 then
+local Button = Tab:CreateButton({
+	Name = "Go To Khei",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs["Ya'alda"].HumanoidRootPart.CFrame
+
+        wait(.4)
+        
+        fireclickdetector(game:GetService("Workspace").NPCs["Ya'alda"].ClickDetector)
+        while wait() do 
+        
+        
+        local args = {
+            [1] = {
+                ["choice"] = "Alright."
+            }
+        }
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Dialogue"):FireServer(unpack(args))
+        end
+    end,
+})
+end
 game.RunService.RenderStepped:Connect(function() 
     if perfloratp == true then 
     local closest
@@ -275,7 +299,7 @@ game.RunService.RenderStepped:Connect(function()
     for i, v in pairs(game:GetService("Workspace").Thrown:GetChildren()) do 
 if v.Name == "FlowerProjectile"  or v.Name == "LightArrow"   then 
     for i, v in pairs(game.Players:GetPlayers()) do 
-    if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then 
+    if v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v ~= game.Players.LocalPlayer then 
         local mag = (game.Players.LocalPlayer:GetMouse().Hit.p - v.Character.HumanoidRootPart.Position).Magnitude
         if mag < closestmag then 
             closestmag = mag 
