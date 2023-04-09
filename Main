@@ -23,7 +23,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 if atb == true and lp.Character ~= nil then
     for i, v in pairs(game.Players:GetPlayers()) do 
         if v ~= lp and v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") and lp.Character:FindFirstChild("HumanoidRootPart") and (lp.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude < 20 then
-            lp.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame + v.Character.HumanoidRootPart.CFrame.LookVector * atbdist * -1
+            lp.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame + v.Character.HumanoidRootPart.CFrame.LookVector * atbdist * -1 + v.Character.Humanoid.MoveDirection * 2
             end
         end
     end
