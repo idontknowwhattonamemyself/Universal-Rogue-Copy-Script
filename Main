@@ -446,7 +446,7 @@ spawn(function()
         if v:FindFirstChild("Backpack") and v:FindFirstChild("Jester's Trick") and not table.find(gnavs, v) or v.Character and v.Character:FindFirstChild("Jester's Trick") and not table.find(gnavs, v) then 
             table.insert(gnavs, v)
             Rayfield:Notify({
-                Title = "Jester Detected",
+                Title = "Spec User Detected",
                 Content = "Player: "..v.Name.."\n Id: "..v.UserId.." \n Could Be Moderator, Be Cautious.",
                 Duration = 50,
                 Image = 4483362458,
