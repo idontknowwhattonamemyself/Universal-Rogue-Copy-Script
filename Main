@@ -141,12 +141,32 @@ if ap == true and game.Players.LocalPlayer.Character ~= nil and game.Players.Loc
         end
     end
 end)
+local tlock = false 
+
 local Toggle = Tab:CreateToggle({
 	Name = "No Fall",
 	CurrentValue = false,
 	Flag = "NOFALL", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
 nofall = Value
+	end,
+})
+local Toggle = Tab:CreateToggle({
+	Name = "Temp Lock",
+	CurrentValue = false,
+	Flag = "TLOCKREALEDITION", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+tlock = Value
+spawn(function()
+while tlock == true do 
+    local args = {
+        [1] = "Paradiso"
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("SetCurrentArea"):FireServer(unpack(args))
+wait(.9)    
+end
+end)
 	end,
 })
 
@@ -265,6 +285,133 @@ local Toggle = Tab:CreateToggle({
 noclip = Value
 	end,
 })
+local gfarm = false
+local Toggle = Tab:CreateToggle({
+	Name = "Gacha Bot",
+	CurrentValue = false,
+	Flag = "GCBOT", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+gfarm = Value
+	end,
+})
+local Button = Tab:CreateButton({
+	Name = "Become Shrieker",
+	Callback = function()
+        local walk = "rbxassetid://9976415637"
+        local sprint = "rbxassetid://9976413946"
+        local shriek = "rbxassetid://9976412716"
+        local grab = "rbxassetid://9976411636"
+        local eat = "rbxassetid://9976410532" 
+        local attack = "rbxassetid://9976409431"
+        
+        local shriekanim = Instance.new("Animation")
+        shriekanim.AnimationId = shriek
+        local eatanim = Instance.new("Animation")
+        eatanim.AnimationId = eat
+        local attackanim = Instance.new("Animation")
+        attackanim.AnimationId = attack
+        
+        local loadedshriek = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(shriekanim)
+        local loadedattack = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(attackanim)
+        local loadedeat = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(eatanim)
+        local sprintanim = Instance.new("Animation")
+        sprintanim.AnimationId = sprint
+        local loadedsprint = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(sprintanim)
+        game.Players.LocalPlayer.Character.Humanoid.Running:Connect(function(speed)
+        if speed < 21 and speed ~= 0 then
+            if not  game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()[loadedwalk] then 
+        loadedwalk:Play()
+            end
+        loadedsprint:Stop()
+        print(speed)
+        elseif speed > 21 then
+            loadedwalk:Stop()
+            if not  game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()[loadedsprint] then 
+        
+        loadedsprint:Play()
+            
+        end
+        print(speed)
+        elseif speed == 0 then 
+            loadedsprint:Stop()
+            loadedwalk:Stop()
+        
+        end
+        end)
+        game.UserInputService.InputBegan:Connect(function(key)
+        if key.KeyCode == Enum.KeyCode.B then 
+            if not  game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()[loadedeat] then 
+                wait(.2)
+                for i, v in pairs(game.Players.LocalPlayer.Character.Humanoid.Animator:GetPlayingAnimationTracks()) do 
+                    v:Stop()
+                    end
+                loadedeat:Play()
+                wait(4)
+                loadedeat:Stop()
+            end
+        end
+        end)
+        game.UserInputService.InputBegan:Connect(function(key)
+            if key.KeyCode == Enum.KeyCode.X then 
+                if not  game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()[loadedshriek] then 
+                loadedshriek:Play()
+                wait(1)
+                loadedshriek:Stop()
+                end
+            end
+            end)
+            local attacking = false 
+            game.UserInputService.InputBegan:Connect(function(key)
+                if key.UserInputType == Enum.UserInputType.MouseButton1 then
+                if attacking == false then
+                attacking = true
+                wait(.2)
+                for i, v in pairs(game.Players.LocalPlayer.Character.Humanoid.Animator:GetPlayingAnimationTracks()) do 
+                v:Stop()
+                end
+                loadedattack:Play()
+                wait(.6)
+
+                loadedattack:Stop()
+                attacking = false
+                end
+            end
+            end)
+    end,
+})
+for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.StatGui.Container.Health.Lives:GetChildren()) do 
+    if  v.Position == UDim2.new(0, 55, 0, 0) and v:FindFirstChild("Char") then         
+        v.Char:GetPropertyChangedSignal("Text"):Connect(function()
+            if gfarm == true then 
+        local done = false 
+        spawn(function()
+            wait(2)
+            done = true
+        end)
+        spawn(function()
+            while wait() do
+        if done == false and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Xenyari.HumanoidRootPart.CFrame - Vector3.new(0, 7, 0)
+        fireclickdetector(game:GetService("Workspace").NPCs.Xenyari.ClickDetector)
+        local args = {
+            [1] = {
+                ["choice"] = "Sure, I'll pay."
+            }
+        }
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("Requests"):WaitForChild("Dialogue"):FireServer(unpack(args))
+        
+        else break;    
+    end
+            end 
+        
+        end)
+    end
+
+        end)
+    end
+end
+
 local perfloratp = false
 local Toggle = Tab:CreateToggle({
 	Name = "tp projectiles (perflora and lp)",
@@ -313,7 +460,7 @@ local Button = Tab:CreateButton({
 local Toggle = Tab:CreateToggle({
 	Name = "start farm",
 	CurrentValue = false,
-	Flag = "NOKBS", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Flag = "TFARM", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
         farm = Value 
         while farm == true do 
@@ -413,7 +560,7 @@ game.RunService.RenderStepped:Connect(function()
     local closest
     local closestmag = 99999999999
     for i, v in pairs(game:GetService("Workspace").Thrown:GetChildren()) do 
-if v.Name == "FlowerProjectile"  or v.Name == "LightArrow" or v.Name == "Crystal"  then 
+if v.Name == "FlowerProjectile"   then 
     for i, v in pairs(game.Players:GetPlayers()) do 
     if v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v ~= game.Players.LocalPlayer then 
         local mag = (game.Players.LocalPlayer:GetMouse().Hit.p - v.Character.HumanoidRootPart.Position).Magnitude
